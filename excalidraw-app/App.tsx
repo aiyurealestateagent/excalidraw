@@ -129,6 +129,7 @@ import {
   LocalData,
   localStorageQuotaExceededAtom,
 } from "./data/LocalData";
+import { SceneStore } from "./data/scenesStore";
 import { isBrowserStorageStateNewer } from "./data/tabSync";
 import { ShareDialog, shareDialogStateAtom } from "./share/ShareDialog";
 import CollabError, { collabErrorIndicatorAtom } from "./collab/CollabError";
@@ -675,6 +676,32 @@ const ExcalidrawWrapper = () => {
     };
   }, [excalidrawAPI]);
 
+  const saveActiveSceneDebouncedRef = useRef(
+    debounce(
+      async (
+        elements: readonly OrderedExcalidrawElement[],
+        appState: AppState,
+      ) => {
+        const id = SceneStore.getActiveId();
+        if (!id) {
+          return;
+        }
+        const existing = await SceneStore.get(id);
+        if (!existing) {
+          return;
+        }
+        await SceneStore.saveSnapshot(
+          id,
+          existing.name,
+          elements,
+          appState,
+          existing.createdAt,
+        );
+      },
+      500,
+    ),
+  );
+
   const onChange = (
     elements: readonly OrderedExcalidrawElement[],
     appState: AppState,
@@ -683,6 +710,8 @@ const ExcalidrawWrapper = () => {
     if (collabAPI?.isCollaborating()) {
       collabAPI.syncElements(elements);
     }
+
+    saveActiveSceneDebouncedRef.current(elements, appState);
 
     // this check is redundant, but since this is a hot path, it's best
     // not to evaludate the nested expression every time

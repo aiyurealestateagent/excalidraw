@@ -1,0 +1,107 @@
+.excalidraw {
+  .scenes-sidebar {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 0.5rem;
+    font-size: 0.85rem;
+  }
+
+  .scenes-sidebar__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.25rem 0.5rem 0.5rem;
+    font-weight: 600;
+  }
+
+  .scenes-sidebar__new {
+    background: var(--color-primary);
+    color: white;
+    border: none;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .scenes-sidebar__new:hover {
+    background: var(--color-primary-darker);
+  }
+
+  .scenes-sidebar__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    flex: 1;
+  }
+
+  .scenes-sidebar__item {
+    display: flex;
+    align-items: center;
+    border-radius: 0.4rem;
+    margin-bottom: 0.25rem;
+
+    &:hover {
+      background: var(--button-hover-bg);
+    }
+  }
+
+  .scenes-sidebar__item--active {
+    background: var(--color-primary-light);
+  }
+
+  .scenes-sidebar__row {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    background: transparent;
+    border: none;
+    padding: 0.4rem 0.5rem;
+    cursor: pointer;
+    color: inherit;
+    overflow: hidden;
+  }
+
+  .scenes-sidebar__name {
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
+  .scenes-sidebar__time {
+    font-size: 0.7rem;
+    opacity: 0.6;
+  }
+
+  .scenes-sidebar__actions {
+    display: flex;
+    gap: 0.15rem;
+    padding-right: 0.25rem;
+
+    button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: inherit;
+      opacity: 0.55;
+      padding: 0.2rem 0.35rem;
+      border-radius: 0.25rem;
+      font-size: 0.85rem;
+    }
+    button:hover {
+      opacity: 1;
+      background: var(--button-hover-bg);
+    }
+  }
+
+  .scenes-sidebar__empty {
+    padding: 1rem;
+    text-align: center;
+    opacity: 0.5;
+  }
+}
