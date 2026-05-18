@@ -148,6 +148,7 @@ import "./index.scss";
 
 import { ExcalidrawPlusPromoBanner } from "./components/ExcalidrawPlusPromoBanner";
 import { AppSidebar } from "./components/AppSidebar";
+import { ScenesTrigger } from "./components/ScenesTrigger";
 
 import type { CollabAPI } from "./collab/Collab";
 
@@ -995,6 +996,15 @@ const ExcalidrawWrapper = () => {
               )}
 
               {collabError.message && <CollabError collabError={collabError} />}
+              <ScenesTrigger
+                onSelect={() =>
+                  excalidrawAPI?.toggleSidebar({
+                    name: "default",
+                    tab: "scenes",
+                    force: true,
+                  })
+                }
+              />
               <LiveCollaborationTrigger
                 isCollaborating={isCollaborating}
                 onSelect={() =>
